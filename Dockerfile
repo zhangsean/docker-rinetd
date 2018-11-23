@@ -3,6 +3,7 @@ MAINTAINER leafsoar <kltwjt@gmail.com>
 
 RUN apt-get update \
 	&& apt-get install -y rinetd \
+	&& apt-get clean all \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN { \
