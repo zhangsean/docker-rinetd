@@ -1,60 +1,39 @@
 # rinetd
-Dockerd rinetd from [leafsoar/rinetd](https://hub.docker.com/r/leafsoar/rinetd/).
+Dockerized rinetd, simply TCP port forward to any port which the container reachable.
+
+Specially useful for running containers which didn't expose some port when it starting for security reason.
+
+Specially useful for exposing a TCP port proxy to an internal service on a gateway server.
+
+Forked from [leafsoar/rinetd](https://hub.docker.com/r/leafsoar/rinetd/).
+
+[![DockerHub Badge](http://dockeri.co/image/zhangsean/rinetd)](https://hub.docker.com/r/zhangsean/rinetd/)
 
 
-## 使用方法
-使用 docker 封装了 rinetd 功能，可以提供端口映射功能
+## Usage
 
-一般内部默认为 8000 端口映射的配置
+Simple run:
+```shell
+docker run -d --name [proxy] -p [new-port]:8000 zhangsean/rinetd [host] [port]
+```
 
-rinetd.conf
+Web example:
+```shell
+# run a web server
+docker run --name web -p 8080:8080 -d zhangsean/hello-web
 
-`
-0.0.0.0 8000 [host] [port]
-`
+# Run a port proxy with link:
+docker run --name web-proxy -p 8000:8000 --link web:web -d zhangsean/rinetd web 8080
 
-启动命令
+# Run a port proxy without link:
+docker run --name web-proxy -p 8000:8000 -d zhangsean/rinetd [IP] 8080
+```
 
-`
-docker run --name [proxy] -p [8080]:8000 -d leafsoar/rinetd [host] [port]
-`
+MySQL example:
+```shell
+# run a mysql server
+docker run --name mysql -d mysql
 
-
-开启一个 web 服务
-
-`
-docker run --name web -p 8080:8080 -d leafsoar/helloworld
-`
-
-
-开启一个代理
-
-`
-docker run --name proxy -p 8000:8000 -d leafsoar/rinetd [IP] 8080
-`
-
-
-通过 link 代理
-
-`
-docker run --name proxy -p 8000:8000 --link web:web -d leafsoar/rinetd web 8080
-`
-
-## 其它用法
-开启一个不暴露端口的容器
-
-`
-docker run --name web -d leafsoar/helloworld
-`
-
-
-通过 link 代理
-
-`
-docker run --name proxy -p 8000:8000 --link web:web -d leafsoar/rinetd web 8080
-`
-
-
-这对于使用 docker 而不用暴露不必要端口时，尤为有用，比如数据库
-
-在比如有些环境 mysql 默认安装时，为提高安全性，只能通过本地 ip 访问，也可以用此方法
+# Run a port proxy with link:
+docker run --name mysql-proxy -p 3306:8000 --link mysql:mysql -d zhangsean/rinetd mysql 3306
+```
