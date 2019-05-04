@@ -1,5 +1,5 @@
-FROM debian:wheezy
-MAINTAINER leafsoar <kltwjt@gmail.com>
+FROM debian:wheezy-slim
+LABEL MAINTAINER="zhangsean <zxf2342@qq.com>"
 
 RUN apt-get update \
 	&& apt-get install -y rinetd \
