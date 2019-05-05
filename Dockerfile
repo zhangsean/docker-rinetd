@@ -1,4 +1,4 @@
-FROM debian:wheezy-slim
+FROM debian:7-slim
 LABEL MAINTAINER="zhangsean <zxf2342@qq.com>"
 
 RUN apt-get update \
