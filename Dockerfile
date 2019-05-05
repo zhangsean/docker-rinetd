@@ -1,10 +1,10 @@
 FROM debian:7-slim
 LABEL MAINTAINER="zhangsean <zxf2342@qq.com>"
 
-RUN apt-get update \
-	&& apt-get install -y rinetd \
-	&& apt-get clean all \
-	&& rm -rf /var/lib/apt/lists/*
+RUN apt update \
+ && apt install -y rinetd \
+ && apt clean all \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN { \
 	echo '#!/bin/bash'; \
