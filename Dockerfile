@@ -1,9 +1,9 @@
-FROM debian:7-slim
+FROM debian:8-slim
 LABEL MAINTAINER="zhangsean <zxf2342@qq.com>"
 
-RUN apt update \
- && apt install -y rinetd \
- && apt clean all \
+RUN apt-get update \
+ && apt-get install -y rinetd \
+ && apt-get clean all \
  && rm -rf /var/lib/apt/lists/*
 
 RUN { \
