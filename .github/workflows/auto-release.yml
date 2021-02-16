@@ -36,7 +36,7 @@ jobs:
           git fetch --tags
           export CURRENT=$(git tag --sort=creatordate | tail -n 1)
           echo "CURRENT=$CURRENT"
-          export RELEASE_LATEST=https://github.com/samhocevar/rinetd/releases/latest
+          export RELEASE_LATEST=https://api.github.com/repos/samhocevar/rinetd/releases/latest
           export LATEST=`curl -s $RELEASE_LATEST | jq -r .tag_name`
           echo "LATEST=$LATEST"
           if [ "$LATEST" != "$CURRENT" ]; then
