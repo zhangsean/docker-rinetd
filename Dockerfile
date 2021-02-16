@@ -13,7 +13,7 @@ RUN apt-get update && \
 
 FROM busybox:glibc
 
-RUN mkdir /var/log && \
+RUN mkdir /var/log /var/run && \
     ln -s /dev/stdout /var/log/rinetd.log
 COPY --from=build /rinetd/rinetd /usr/sbin/rinetd
 COPY entrypoint.sh /usr/local/bin/
