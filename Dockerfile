@@ -5,8 +5,8 @@ ENV RINETD_VERSION=v0.63
 RUN apt-get update && \
     apt-get install -y wget gcc make && \
     wget https://github.com/samhocevar/rinetd/releases/download/${RINETD_VERSION}/rinetd-${RINETD_VERSION#v}.tar.gz && \
-    tar zxvf rinetd-${RINETD_VERSION}.tar.gz && \
-    mv rinetd-${RINETD_VERSION} rinetd && \
+    tar zxvf rinetd-*.tar.gz && \
+    mv rinetd-*/ rinetd && \
     cd rinetd/ && \
     ./configure && \
     make
