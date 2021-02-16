@@ -1,19 +1,23 @@
-FROM debian:8-slim
-LABEL MAINTAINER="zhangsean <zxf2342@qq.com>"
+FROM debian:8-slim AS build
 
-RUN apt-get update \
- && apt-get install -y rinetd \
- && apt-get clean all \
- && rm -rf /var/lib/apt/lists/*
+ENV RINETD_VERSION=0.72
 
-RUN { \
-	echo '#!/bin/bash'; \
-	echo 'set -e'; \
-	echo 'echo "0.0.0.0        8000    $1      $2" >> /rinetd.conf'; \
-	echo 'echo "logfile /var/log/rinetd.log" >>/rinetd.conf'; \
-	echo '/usr/sbin/rinetd -f -c /rinetd.conf'; \
-    } > /rinetd-entrypoint.sh
+RUN apt-get update && \
+    apt-get install -y wget gcc make && \
+    wget https://github.com/samhocevar/rinetd/releases/download/v${RINETD_VERSION}/rinetd-${RINETD_VERSION}.tar.gz && \
+    tar zxvf rinetd-${RINETD_VERSION}.tar.gz && \
+    mv rinetd-${RINETD_VERSION} rinetd && \
+    cd rinetd/ && \
+    ./configure && \
+    make
 
-RUN chmod +x /rinetd-entrypoint.sh
+FROM busybox:glibc
 
-ENTRYPOINT ["/rinetd-entrypoint.sh"]
+RUN mkdir /var/log && \
+    ln -s /dev/stdout /var/log/rinetd.log
+COPY --from=build /rinetd/rinetd /usr/sbin/rinetd
+COPY entrypoint.sh /usr/local/bin/
+
+EXPOSE 8000
+
+ENTRYPOINT ["entrypoint.sh"]
