@@ -47,3 +47,10 @@ docker run --name mysql -d mysql
 # Run a port proxy with link:
 docker run --name mysql-proxy -p 3306:8000 --link mysql:mysql -d zhangsean/rinetd mysql 3306
 ```
+
+### Given bind port
+
+```sh
+# Forward host:8086 to container proxy:80, container bind :80 to 172.16.2.3:8010
+docker run -itd --name proxy -p 8086:80 zhangsean/rinetd 172.16.2.3 8010 80
+```
