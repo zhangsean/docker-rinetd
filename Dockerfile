@@ -1,6 +1,6 @@
 FROM debian:stable-slim AS build
 
-ENV RINETD_VERSION=v0.73
+ENV RINETD_VERSION=null
 
 RUN apt-get update && \
     apt-get install -y wget gcc make && \
