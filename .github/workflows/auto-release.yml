@@ -37,7 +37,7 @@ jobs:
           export CURRENT=$(git tag --sort=creatordate | tail -n 1)
           echo "CURRENT=$CURRENT"
           export RELEASE_LATEST=https://api.github.com/repos/samhocevar/rinetd/releases/latest
-          export LATEST=`curl -s $RELEASE_LATEST | jq -r .tag_name`
+          export LATEST=`curl -s $RELEASE_LATEST | sed -n '/tag_name/s/.*\(v.*\)".*/\1/p'`
           echo "LATEST=$LATEST"
           if [ "$LATEST" != "$CURRENT" ]; then
             echo "New rinetd release: $LATEST"
