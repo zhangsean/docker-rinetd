@@ -56,7 +56,7 @@ jobs:
           echo "Bump rinetd version from $CURRENT to $LATEST"
           sed -i "/RINETD_VERSION/s/$CURRENT/$LATEST/g" Dockerfile
           # commit and push
-          if [ `git status | wc -l` > 0 ]; then
+          if [ `git status | grep nothing` > 0 ]; then
             git config user.email zxf2342@qq.com
             git config user.name zhangsean
             git commit -a -m "Bump to rinetd $LATEST"
