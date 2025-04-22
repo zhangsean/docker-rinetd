@@ -54,3 +54,9 @@ docker run --name mysql-proxy -p 3306:8000 --link mysql:mysql -d zhangsean/rinet
 # Forward host:8086 to container proxy:80, container bind :80 to 172.16.2.3:8010
 docker run -itd --name proxy -p 8086:80 zhangsean/rinetd 172.16.2.3 8010 80
 ```
+
+### UDP
+
+```sh
+docker run -itd --name ntp -p 123:123/udp zhangsean/rinetd ntp.aliyun.com 123 123 udp
+```
