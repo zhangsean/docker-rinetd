@@ -2,7 +2,7 @@
 set -e
 if [ ! -f /etc/rinetd.conf ]; then
   proto=${4}
-  if [ $proto == udp ]; then
+  if [ $proto == 'udp' ]; then
     proto=/udp
   fi
   echo "0.0.0.0 ${3:-8000}$proto $1 $2$proto" > /etc/rinetd.conf
