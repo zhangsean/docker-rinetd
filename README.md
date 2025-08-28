@@ -1,6 +1,8 @@
 # Docker-Rinetd
 
-[![DockerHub Badge](http://dockeri.co/image/zhangsean/rinetd)](https://hub.docker.com/r/zhangsean/rinetd/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/zhangsean/rinetd.svg)](https://hub.docker.com/r/zhangsean/rinetd/)
+[![Docker Stars](https://img.shields.io/docker/stars/zhangsean/rinetd.svg)](https://hub.docker.com/r/zhangsean/rinetd/)
+[![Docker Stars](https://img.shields.io/docker/image-size/zhangsean/rinetd.svg)](https://hub.docker.com/r/zhangsean/rinetd/)
 
 Dockerized rinetd, simply TCP port forward to any port which the container reachable.
 
